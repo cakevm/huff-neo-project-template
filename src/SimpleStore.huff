@@ -17,7 +17,7 @@
 
 #define macro GET_VALUE() = takes (0) returns (0) {
     // Load value from storage.
-    [VALUE_LOCATION]   // [ptr]
+    [VALUE_LOCATION]     // [ptr]
     sload                // [value]
 
     // Store value in memory.

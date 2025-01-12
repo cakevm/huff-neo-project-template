@@ -1,6 +1,10 @@
 name: ci
 
-on: [push]
+on:
+    push:
+        branches: [main]
+    pull_request_target:
+        branches: [main]
 
 jobs:
   tests:
@@ -8,54 +12,49 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
+          fetch-depth: 0
 
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
         with:
           version: nightly
 
-      - name: Install Huff
-        uses: huff-language/huff-toolchain@v2
-        with:
-          version: nightly
+      - name: Install Huff Neo Compiler
+        uses: cakevm/huff-neo-toolchain@v1
 
       - name: Run Tests
-        run: forge test -vvv
+        run: forge test
 
   scripts:
-    strategy:
-      fail-fast: true
     name: Run Scripts
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
+          fetch-depth: 0
 
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
         with:
           version: nightly
 
-      - name: Install Huff
-        uses: huff-language/huff-toolchain@v3
-        with:
-          version: nightly
+      - name: Install Huff Neo Compiler
+        uses: cakevm/huff-neo-toolchain@v1
 
       - name: Run Forge build
         run: |
           forge --version
           forge build --sizes
         id: build
-        continue-on-error: true
 
       - name: Run scripts
         run: |
           ls -lsa
           ls script/
           for file in script/*; do
-            forge script $file -vvvv
+            forge script $file
           done

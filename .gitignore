@@ -11,6 +11,7 @@ out/
 
 # Vscode
 .vscode/
+.idea/
 
 # huffc artifacts
 artifacts
