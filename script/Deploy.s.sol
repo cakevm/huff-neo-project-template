@@ -12,6 +12,6 @@ interface SimpleStore {
 
 contract Deploy is Script {
     function run() public returns (SimpleStore simpleStore) {
-        simpleStore = SimpleStore(HuffNeoDeployer.deploy("SimpleStore"));
+        simpleStore = SimpleStore(HuffNeoDeployer.deploy("src/SimpleStore.huff"));
     }
 }
