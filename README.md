@@ -64,8 +64,8 @@ For more information on how to use Foundry, check out the [Foundry Github Reposi
 
 ```ml
 lib
-├─ forge-std — https://github.com/foundry-rs/forge-std
-├─ foundry-huff-neo — https://github.com/cakevm/foundry-huff-neo
+├─ forge-std — Forge Standard Library
+├─ foundry-huff-neo — Huff Neo Foundry Library
 scripts
 ├─ Deploy.s.sol — Deployment Script
 src
