@@ -36,7 +36,7 @@ Click "Use this template" on [GitHub](https://github.com/cakevm/huff-neo-project
 Or run:
 
 ```
-git clone https://github.com/cakevm/huff-neo-project-template
+git clone --recurse-submodules https://github.com/cakevm/huff-neo-project-template
 cd huff-neo-project-template
 ```
 
