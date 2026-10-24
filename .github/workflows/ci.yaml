@@ -3,7 +3,7 @@ name: ci
 on:
     push:
         branches: [main]
-    pull_request_target:
+    pull_request:
         branches: [main]
 
 jobs:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           submodules: recursive
           fetch-depth: 0
@@ -28,11 +28,14 @@ jobs:
       - name: Run Tests
         run: forge test
 
+      - name: Run Huff Tests
+        run: for file in test/*.t.huff; do hnc $file test || exit 1; done
+
   scripts:
     name: Run Scripts
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           submodules: recursive
           fetch-depth: 0

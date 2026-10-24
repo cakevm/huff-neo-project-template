@@ -1,0 +1,26 @@
+// Tests SimpleStore in Huff with `hnc test`. Each test runs the contract's MAIN as the test contract:
+// decorators set up the call and check the result, and foundry-huff-neo provides Foundry's cheatcodes
+// and assertions.
+
+#include "../src/SimpleStore.huff"
+#include "foundry-huff-neo/test.huff"
+
+// setValue(42) stores 42
+#[calldata(__FUNC_SIG(setValue), 42)]
+#[expect_storage([VALUE_LOCATION], 42)]
+#define test SET_VALUE_STORES_IT() = { MAIN() }
+
+// getValue() returns the stored value
+#[calldata(__FUNC_SIG(getValue)), store([VALUE_LOCATION], 7)]
+#[expect_return(7)]
+#define test GET_VALUE_RETURNS_IT() = { MAIN() }
+
+// An unknown function reverts
+#[calldata(0xdeadbeef), expect_revert]
+#define test UNKNOWN_FUNCTION_REVERTS() = { MAIN() }
+
+// A value set with vm.store is the one the contract reads
+#define test READS_A_VALUE_SET_BY_CHEATCODE() = {
+    0x2a [VALUE_LOCATION] address VM_STORE(0x00)  // vm.store(address(this), VALUE_LOCATION, 42)
+    0x2a [VALUE_LOCATION] sload ASSERT_EQ()        // assertEq(sload(VALUE_LOCATION), 42)
+}
