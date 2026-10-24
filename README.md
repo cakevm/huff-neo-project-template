@@ -57,6 +57,18 @@ forge build
 forge test
 ```
 
+4. Test in Huff
+
+Tests can also be written in Huff and run with `hnc test`, using Foundry's cheatcodes and assertions from
+[foundry-huff-neo](https://github.com/cakevm/foundry-huff-neo):
+
+```shell
+hnc test/SimpleStore.t.huff test
+```
+
+See `test/SimpleStore.t.huff` and the [Huff Neo book](https://www.huff-neo.rs/huff-language/tests.html) for
+the test syntax.
+
 For more information on how to use Foundry, check out the [Foundry Github Repository](https://github.com/foundry-rs/foundry/tree/master/forge) and the [foundry-huff-neo library repository](https://github.com/cakevm/foundry-huff-neo).
 
 
@@ -71,7 +83,8 @@ scripts
 src
 ├─ SimpleStore — A Simple Storage Contract in Huff
 test
-└─ SimpleStore.t — SimpleStoreTests
+├─ SimpleStore.t.sol — SimpleStore tests in Solidity
+└─ SimpleStore.t.huff — SimpleStore tests in Huff
 ```
 
 ## Disclaimer

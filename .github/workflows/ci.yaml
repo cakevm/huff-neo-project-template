@@ -28,6 +28,9 @@ jobs:
       - name: Run Tests
         run: forge test
 
+      - name: Run Huff Tests
+        run: for file in test/*.t.huff; do hnc $file test || exit 1; done
+
   scripts:
     name: Run Scripts
     runs-on: ubuntu-latest
